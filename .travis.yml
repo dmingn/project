@@ -1,0 +1,32 @@
+language: python
+
+cache:
+  - ccache
+  - pip
+
+matrix:
+  include:
+    - os: linux
+      python: 2.7
+    - os: linux
+      python: 3.5
+
+before_install:
+  - wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda info -a
+
+install:
+  - conda create --name=project python=$TRAVIS_PYTHON_VERSION -q -y
+
+before_script:
+  - pip install flake8 hacking
+
+script:
+  - flake8 .
+
+notifications:
+  email: false
