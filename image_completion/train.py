@@ -68,7 +68,7 @@ def main():
     # Set up a trainer
     updater = Updater(
         models=(gen, dis),
-        mean_val=0.376549,
+        mean_val=0.26,
         t_c=90000,
         t_d=10000,
         alpha=0.0004,
